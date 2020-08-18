@@ -3,28 +3,16 @@ import { fifaData } from './fifa.js';
 
 // ⚽️ M  V P ⚽️ //
 
-
-
-
-/* Task 2: Create a function called  getFinals that takes `data` as an argument and returns an array of objects with only finals data */
+/* Task 2 */
 import { getFinals, getFinals2 } from './task-2.js';
 console.log(getFinals(fifaData));
 console.log(getFinals2(fifaData));
 
 
-/* Task 3: Implement a higher-order function called `getYears` that accepts the callback function `getFinals`, and returns an array called `years` containing all of the years in the dataset */
-
-function getYears(callback) {
-    // Input:   Callback function `getFinals`
-    // Output:  An array called `years` containing all of the years in the dataset
-    const finals_data = callback(fifaData);
-    const new_arr = [];
-    finals_data.forEach((elem) => {
-        new_arr.push(elem.Year);
-    });
-    return new_arr;
-};
-console.log(getYears(getFinals));
+/* Task 3 */
+import { getYears, getYears2 } from './task-3.js';
+console.log(getYears(getFinals, fifaData));
+console.log(getYears2(getFinals2, fifaData));
 
 // redo with .map() method:
 
