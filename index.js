@@ -27,6 +27,10 @@ function getFinals(data) {
 };
 console.log(getFinals(fifaData));
 
+// redo with .filter method:
+const getFinals2 = (dta) => dta.filter(x => x.Stage.toLowerCase() === 'final');
+console.log(getFinals2(fifaData));
+
 
 /* Task 3: Implement a higher-order function called `getYears` that accepts the callback function `getFinals`, and returns an array called `years` containing all of the years in the dataset */
 
