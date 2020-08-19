@@ -76,6 +76,7 @@ function getGoals(data) {
     for (let i = 0; i < distinct_names.length; i++)
         distinct_names_ave_goals.push(distinct_names_sum_goals[i] / distinct_names_sum_goals.length);
 
+    console.log('Average of goals for each team in finals (same index as team-names array):');
     console.log(distinct_names_ave_goals);
 
 
@@ -92,6 +93,8 @@ function getGoals(data) {
 
     // -grab team name corresponding to the maximum average value found above:
     const name_of_team_with_max_ave_goals_in_finals = distinct_names[max_index];
+
+    console.log('Team with max average goals in finals:');
     console.log(name_of_team_with_max_ave_goals_in_finals);
     return name_of_team_with_max_ave_goals_in_finals;
 };
