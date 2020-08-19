@@ -17,15 +17,7 @@ function getGoals(data) {
 
     // Step 0: Get finals 
     const finals = data.filter(elem => elem.Stage.toLowerCase() === 'final');
-    // console.log(finals);
 
-    // const x = [1, 2, 3];
-    // x.forEach((elem) => {
-
-    // });
-
-
-    
     // Step 1: Compute average score for each team
     // -Grab name of home / away team
     const team_names = [];
