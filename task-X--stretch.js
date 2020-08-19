@@ -32,6 +32,7 @@ function getGoals(data) {
     
 
     // -Extract only the unique names: (following distinct() function is from: https://codeburst.io/javascript-array-distinct-5edc93501dc4)
+    // NOTE: all other code is completely my own from my mind without reference. Only the distinct function and its usage is not mine!
     const distinct = (value, index, self) => {
         return self.indexOf(value) === index;
     };
