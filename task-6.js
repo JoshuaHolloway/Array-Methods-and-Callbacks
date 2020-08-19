@@ -2,7 +2,6 @@
 
 function getAverageGoals(data) {
 
-
     let sum_home_goals = 0;
     let sum_away_goals = 0;
 
@@ -18,6 +17,24 @@ function getAverageGoals(data) {
 };
 
 // repeat with .reduce()
-const getAverageGoals2 = () => {};
+const getAverageGoals2 = (data) => {
+
+    // Number of games in the dataset
+    // (for normalization factor)
+    const N = data.length;
+    
+    const init_val = 0;
+    const ave_home_goals = data.reduce(function(acc, elem) {
+        return acc + elem['Home Team Goals'];
+    }, init_val) / N;
+
+    console.log(ave_home_goals);
+
+    const ave_away_goals = data.reduce(function(acc, elem) {
+        return acc + elem['Away Team Goals'];
+    }, init_val) / N;
+
+    return {ave_home_goals, ave_away_goals};
+};
 
 export { getAverageGoals, getAverageGoals2 };

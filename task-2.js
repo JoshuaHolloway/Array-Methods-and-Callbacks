@@ -13,10 +13,8 @@ function getFinals(data) {
 };
 
 
-
 // redo with .filter method:
 const getFinals2 = (dta) => dta.filter(x => x.Stage.toLowerCase() === 'final');
-
 
 
 export { getFinals, getFinals2 };
