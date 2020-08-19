@@ -3,14 +3,6 @@ import { fifaData } from './fifa.js';
 
 // ⚽️ M  V P ⚽️ //
 
-/* Task 2 */
-console.log('Task-2');
-import { getFinals, getFinals2 } from './task-2.js';
-const finals = getFinals(fifaData);
-console.log(finals);
-console.log(getFinals2(fifaData));
-console.log('--------------------------------------');
-
 /* Task 1 */
 console.log('Task-1');
 import { get_finals_2014, tasks_1 } from './task-1.js';
@@ -22,6 +14,13 @@ console.log(`Away Team goals for 2014 world cup final: ${tasks_1[3]()}`); // d
 console.log(`Winner of 2014 world cup final: ${tasks_1[4]()}`); // e
 console.log('--------------------------------------');
 
+/* Task 2 */
+console.log('Task-2');
+import { getFinals, getFinals2 } from './task-2.js';
+const finals = getFinals(fifaData);
+console.log(finals);
+console.log(getFinals2(fifaData));
+console.log('--------------------------------------');
 
 /* Task 3 */
 console.log('Task-3');
