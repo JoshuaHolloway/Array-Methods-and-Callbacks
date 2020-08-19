@@ -34,7 +34,9 @@ const getAverageGoals2 = (data) => {
         return acc + elem['Away Team Goals'];
     }, init_val) / N;
 
-    return {ave_home_goals, ave_away_goals};
+    console.log(ave_away_goals);
+
+    return [ave_home_goals, ave_away_goals];
 };
 
 export { getAverageGoals, getAverageGoals2 };

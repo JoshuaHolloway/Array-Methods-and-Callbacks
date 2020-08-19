@@ -6,7 +6,7 @@
 Hint: Investigate your data to find "team initials"!
 Hint: use `.reduce` */
 
-function getCountryWins(/* code here */) {
+function getCountryWins(data) {
 
     /* code here */
 
@@ -37,3 +37,5 @@ function badDefense(/* code here */) {
 badDefense();
 
 /* If you still have time, use the space below to work on any stretch goals of your chosing as listed in the README file. */
+
+export {getCountryWins, getGoals, badDefense};
