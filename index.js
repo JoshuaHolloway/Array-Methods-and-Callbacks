@@ -91,8 +91,8 @@ function getWinners(data, callback) {
             new_arr.push(away_team_name);
         else if (home_team_goals > away_team_goals)
             new_arr.push(home_team_name);
-        else
-            new_arr.push('**TIE**');
+        // else
+        //     new_arr.push('**TIE**');
     });
     return new_arr;
 }
@@ -109,9 +109,19 @@ Use the higher-order function getWinnersByYear to do the following:
 hint: the strings returned need to exactly match the string in step 4.
  */
 
-function getWinnersByYear(/* code here */) {
-    /* code here */
+function getWinnersByYear(data, getFinals) {
+
+    return getWinners(data, getFinals);
+
+    // const new_arr = [];
+    // for (let i = 0; i < winners.length; i++) {
+    //     new_arr.push(winners[i]);
+    // }
+    // return new_arr;
 }
+const ddd = getWinnersByYear(fifaData, getFinals);
+console.log(ddd);
+
 
 
 
@@ -125,9 +135,21 @@ Use the higher order function getAverageGoals to do the following:
  Example of invocation: getAverageGoals(getFinals(fifaData));
 */
 
-function getAverageGoals(/* code here */) {
-   /* code here */
+function getAverageGoals(data) {
+    let sum_home_goals = 0;
+    let sum_away_goals = 0;
+
+    data.forEach((elem) => {
+        sum_home_goals += elem['Home Team Goals'];
+        sum_away_goals += elem['Away Team Goals'];
+    });
+    const N = data.length;
+    const ave_home_goals = sum_home_goals / N;
+    const ave_away_goals = sum_away_goals / N;
+
+    return {ave_home_goals, ave_away_goals};
 }
+console.log(getAverageGoals(fifaData));
 
 
 
@@ -151,11 +173,86 @@ function getCountryWins(/* code here */) {
 /* 💪💪💪💪💪 Stretch 2: 💪💪💪💪💪 
 Write a function called getGoals() that accepts a parameter `data` and returns the team with the most goals score per appearance (average goals for) in the World Cup finals */
 
-function getGoals(/* code here */) {
 
-    /* code here */
+function getGoals(data) {
 
-}
+    // Step 0: Get finals 
+    const finals = data.filter(elem => elem.Stage.toLowerCase() === 'final');
+
+    // Step 1: Compute average score for each team
+    // -Grab name of home / away team
+    const team_names = [];
+    finals.forEach((elem) => {
+        const home_team = elem['Home Team Name'];
+        const away_team = elem['Away Team Name'];
+        // console.log(home_team, away_team);
+
+        team_names.push(home_team);
+        team_names.push(away_team);
+    });
+    
+
+    // -Extract only the unique names: (following distinct() function is from: https://codeburst.io/javascript-array-distinct-5edc93501dc4)
+    // NOTE: all other code is completely my own from my mind without reference. Only the distinct function and its usage is not mine!
+    const distinct = (value, index, self) => {
+        return self.indexOf(value) === index;
+    };
+    const distinct_names = team_names.filter(distinct);
+    console.log('All teams in finals (same index as average and sum arrays below):');
+    console.log(distinct_names);
+
+    // -Create new array same size of distinct_names that stores the sum of all goals corresponding to same index as team in distinct_names array
+    let distinct_names_sum_goals = [];
+    for (let i = 0; i < distinct_names.length; i++)
+        distinct_names_sum_goals.push(0);
+    // console.log(distinct_names_sum_goals);
+
+    // -Itterate over the finals dataset and for each element add up the goals for each team
+    distinct_names.forEach((distinct_name, distinct_name_index) => {
+        
+        // --Search the dataset for goals corresponding to current team
+        finals.forEach((finals_elem) => {
+            if (finals_elem['Home Team Name'] === distinct_name)
+                distinct_names_sum_goals[distinct_name_index] += finals_elem['Home Team Goals'];
+
+            // ---Combine goals (don't discriminate if team is away or home - only care about team name):
+            if (finals_elem['Away Team Name'] === distinct_name)
+                distinct_names_sum_goals[distinct_name_index] += finals_elem['Away Team Goals'];
+        });
+    });
+    console.log('Sum of goals for each team in finals (same index as team-names array):');
+    console.log(distinct_names_sum_goals);
+
+
+    
+    // -Divide by number of wins for average
+    let distinct_names_ave_goals = [];
+    for (let i = 0; i < distinct_names.length; i++)
+        distinct_names_ave_goals.push(distinct_names_sum_goals[i] / distinct_names_sum_goals.length);
+
+    console.log('Average of goals for each team in finals (same index as team-names array):');
+    console.log(distinct_names_ave_goals);
+
+
+    // Step 2: Find max
+    // -Find index corresponding to max, then grab the team name with this index
+    let max = distinct_names_ave_goals[0];
+    let max_index = 0;
+    for( let i = 1; i < distinct_names_ave_goals.length; i++ ) {
+        if (distinct_names_ave_goals[i] > max) {
+            max = distinct_names_ave_goals[i];
+            max_index = i;
+        }
+    }
+
+    // -grab team name corresponding to the maximum average value found above:
+    const name_of_team_with_max_ave_goals_in_finals = distinct_names[max_index];
+
+    console.log('Team with max average goals in finals:');
+    console.log(name_of_team_with_max_ave_goals_in_finals);
+    return name_of_team_with_max_ave_goals_in_finals;
+};
+
 
 
 /* 💪💪💪💪💪 Stretch 3: 💪💪💪💪💪
